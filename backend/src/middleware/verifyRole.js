@@ -8,6 +8,7 @@ export const verifyRole= (...allowedRoles)=>{
                 message:"Access Denied"
             })
         }
+        next()
 
     }
 

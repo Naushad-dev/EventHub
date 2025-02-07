@@ -15,28 +15,36 @@ userRouter.get(
   }
 );
 userRouter.get(
-    "/host",
-    authorizeUser,
-    verifyRole("admin","host"),
-    async (req, res) => {
-      const user = req.user;
-      return res.json({
-        message: `Welcome ${user.name} host your events`,
-      });
-    }
-  );
-  
-  userRouter.get(
-    "/user",
-    authorizeUser,
-    verifyRole("admin","host","user"),
-    async (req, res) => {
-      const user = req.user;
-      return res.json({
-        message: `Welcome ${user.name} register for events`,
-      });
-    }
-  );
-  
+  "/host",
+  authorizeUser,
+  verifyRole("admin", "host"),
+  async (req, res) => {
+    const user = req.user;
+    return res.json({
+      message: `Welcome ${user.name} host your events`,
+    });
+  }
+);
+
+userRouter.get(
+  "/user",
+  authorizeUser,
+  verifyRole("admin", "host", "user"),
+  async (req, res) => {
+    const user = req.user;
+    return res.json({
+      message: `Welcome ${user.name} register for events`,
+    });
+  }
+);
+
+userRouter.get("/get-details", authorizeUser, async (req, res) => {
+  const user = req.user;
+
+  return res.json({
+    message: "Here is details",
+    data: user,
+  });
+});
 
 export default userRouter;
