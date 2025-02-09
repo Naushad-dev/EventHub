@@ -11,6 +11,7 @@ export async function RegisterUser(req, res) {
   
     try {
       const { name, email, password,role } = req.body;
+      console.log("Log from server",name,email)
     
       const existingUser = await User.userAlreadyExists(email);
       // console.log("user", user);

@@ -1,8 +1,13 @@
 import React from 'react'
-
+import Home from './pages/Home'
+import Navbar from './components/Navbar'
+import {Outlet} from "react-router-dom"
 const App = () => {
   return (
-    <div><h1 className='text-4xl text-green-500'>Working Fine and </h1></div>
+  <>
+  <Navbar/>
+  <Outlet/>
+  </>
   )
 }
 
