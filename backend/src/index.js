@@ -5,7 +5,7 @@ dotenv.config()
 import app from "./app.js"
 
 // const app= express()
-console.log(process.env.port)
+// console.log(process.env.port)
 
 connectDB()
 .then(() => {

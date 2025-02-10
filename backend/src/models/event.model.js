@@ -14,6 +14,7 @@ const eventSchema = new Schema(
     },
     bannerPhoto: {
       type: String,
+      required:true
     },
     targetAudience: {
       type: [String],
@@ -27,6 +28,7 @@ const eventSchema = new Schema(
       required: true,
       enum: {
         values: ["Virtual", "In-Person", "Hybrid"],
+        message: `{VALUE} is not valid type `
       },
     },
     eventDate: {
@@ -51,7 +53,6 @@ const eventSchema = new Schema(
         user: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "User",
-          required: true,
         },
         status: {
           type: String,

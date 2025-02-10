@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { RegisterUser } from "../state/authSlice";
+import axios from "axios";
 const Register = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    role: "attend",
+    role: "",
   });
   const dispatch = useDispatch();
-  const navigate= useNavigate()
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -18,12 +19,26 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Handle submit is working");
-    dispatch(RegisterUser(formData));
-navigate("/")
+    getData();
+
+    // dispatch(RegisterUser(formData));
+    // navigate("/");
 
     console.log("Register Data:", formData);
   };
 
+  const getData = async () => {
+    const { name, email, password, role } = formData;
+
+    const res = await axios.post("http://localhost:3000/api/v1/user/register", {
+      name,
+      email,
+      password,
+      role,
+    });
+    console.log(res);
+  };
+ 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
       <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-6">
@@ -68,8 +83,8 @@ navigate("/")
               <input
                 type="radio"
                 name="role"
-                value="organize"
-                checked={formData.role === "organize"}
+                value="host"
+                checked={formData.role === "host"}
                 onChange={handleChange}
                 className="text-[#f02e65] focus:ring-[#f02e65]"
               />
@@ -79,8 +94,8 @@ navigate("/")
               <input
                 type="radio"
                 name="role"
-                value="attend"
-                checked={formData.role === "attend"}
+                value="user"
+                checked={formData.role === "user"}
                 onChange={handleChange}
                 className="text-[#f02e65] focus:ring-[#f02e65]"
               />

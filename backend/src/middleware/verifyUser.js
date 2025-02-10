@@ -14,10 +14,10 @@ export async function authorizeUser(req, res, next) {
 
     const userToken = cookieToken || headerToken;
     // const userToken= [...request]
-    // console.log("Token mila ", userToken);
+    console.log("Token mila ", userToken);
     if (userToken) {
       const decodedToken = jwt.verify(userToken, process.env.PRIVATE_KEY);
-      // console.log("token ko decode kiys", decodedToken);
+      console.log("token ko decode kiys", decodedToken);
       const verifiedUser = await User.findById(decodedToken._id);
 
       if (!verifiedUser) {
@@ -27,6 +27,7 @@ export async function authorizeUser(req, res, next) {
         });
       }
       req.user = verifiedUser;
+      console.log("user role is ",verifiedUser.role)
       next();
     } else {
       return res.status(400).json({

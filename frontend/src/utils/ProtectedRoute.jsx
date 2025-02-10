@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
-const {token}= useSelector((state)=>state.authReducer)
+const token= true
 
   // const isAuthenticated = false
   console.log("state",token)

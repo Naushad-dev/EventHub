@@ -24,7 +24,7 @@ const Login = () => {
     console.log("Login Data:", formData);
   };
 const getData= async()=>{
-   const res = await axios.get("http://localhost:3000/api/v1/user/check-working")
+   const res = await axios.post("http://localhost:3000/api/v1/user/check-working")
    console.log(res)
 }
   useEffect(()=>{
