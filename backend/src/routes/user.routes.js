@@ -33,7 +33,7 @@ userRouter.get(
   async (req, res) => {
     const user = req.user;
     return res.json({
-      message: `Welcome ${user.name} register for events`,
+      message: `Welcome ${user.name} is a ${user.role}  `,
     });
   }
 );

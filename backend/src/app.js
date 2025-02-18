@@ -1,13 +1,17 @@
-import express, { json } from "express"
+import express from "express"
 import cookieParser from "cookie-parser"
 import cors from "cors"
+import bodyParser from "body-parser"
 const app= express()
+
 
 //middleware
 app.use(cookieParser())
 app.use(express.json())
 app.use(cors())
 app.use(express.urlencoded({extended:false}))
+app.use(bodyParser.json())
+
 
 
 //Routes imports

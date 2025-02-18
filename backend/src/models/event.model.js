@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import { type } from "os";
 
 const eventSchema = new Schema(
   {
@@ -6,6 +7,7 @@ const eventSchema = new Schema(
       type: String,
       required: true,
       maxlength: 50,
+      unique: true,
     },
     description: {
       type: String,
@@ -14,7 +16,8 @@ const eventSchema = new Schema(
     },
     bannerPhoto: {
       type: String,
-      required:true
+      required: true,
+      default: "https://placehold.co/600x400/000000/FFFFFF.png",
     },
     targetAudience: {
       type: [String],
@@ -28,16 +31,16 @@ const eventSchema = new Schema(
       required: true,
       enum: {
         values: ["Virtual", "In-Person", "Hybrid"],
-        message: `{VALUE} is not valid type `
+        message: `{VALUE} is not valid type `,
       },
     },
     eventDate: {
       type: Date,
       required: true,
+      default: Date.now,
     },
-    hostName: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+    eventTime: {
+      type: String,
       required: true,
     },
     hostEmail: {
@@ -48,19 +51,6 @@ const eventSchema = new Schema(
     address: {
       type: String,
     },
-    attendees: [
-      {
-        user: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "User",
-        },
-        status: {
-          type: String,
-          enum: ["confirmed", "pending", "declined"],
-          default: "pending",
-        },
-      },
-    ],
   },
   { timestamps: true }
 );

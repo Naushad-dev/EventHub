@@ -20,7 +20,6 @@ export const SignUpValidation = [
   (req, res, next) => {
     const errors = validationResult(req);
     console.log("user validation is ....");
-    
 
     if (!errors.isEmpty()) {
       return res.status(400).json({
@@ -63,28 +62,27 @@ export const LoginValidation = [
 
 export const eventValidation = [
   check("eventName")
-  .isEmpty().withMessage("Event Name is Required")
-  .isLength({max:50}).trim(),
+    .notEmpty()
+    .withMessage("Event Name is Required")
+    .isLength({ max: 50 })
+    .trim(),
   check("description")
-  .isEmpty().withMessage("Description Name is Required")
-  .isLength({max:300}).trim(),
-  check("targetAudience").isEmpty(),
-  check("eventType").isEmpty(),
-  check("eventDate").isEmpty().isDate(),
-  check("address").isEmpty(),
+    .notEmpty()
+    .withMessage("Description Name is Required")
+    .isLength({ max: 300 })
+    .trim(),
+  check("targetAudience").notEmpty(),
+  check("eventType").notEmpty(),
+  check("address").notEmpty(),
 
   //middleware to handle validation
-  (req,res,next)=>{
-     const errors = validationResult(req);
-     if(errors.isEmpty()){
-      res.status(400).json({
-        status: "error",
-        errors: errors.array(),
-      });
+  (req, res, next) => {
+    const errors = validationResult(req);
+    console.log("error while validating ", errors);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
     next();
-
-  }
-
-  
+  },
 ];

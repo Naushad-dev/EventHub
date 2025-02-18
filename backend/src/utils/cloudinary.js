@@ -26,7 +26,7 @@ export const uploadToCloudinary = async (filePath) => {
         { fill: "auto" },
       ],
     });
-    console.log("cloudinary response", response);
+    // console.log("cloudinary response", response);
     if (response) {
       fs.unlinkSync(filePath);
     }
